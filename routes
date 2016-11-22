@@ -1,0 +1,12 @@
+/                                 HomeR           GET
+/biblioteca                       BibliotecaR     GET POST
+/portal                           PortalR         GET     
+/sobre                            SobreR          GET
+/static                           StaticR         Static getStatic
+/tcc/cadastro                     TccR            GET POST
+/tcc/listagem                     ListTccR        GET
+/usuario/cadastro                 UsuarioR        GET POST
+/usuario/login                    LoginR          GET POST
+/perfil                           PerfilR         GET
+/logoff                           LogoffR         POST
+/curso/cadastro                   CadastroCursR       GET POST

@@ -1,0 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+::-webkit-scrollbar-track {
+    background-color: #E0E0E0;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #BDBDBD;
+}
+
+
+html , body{
+    height:100%;
+}
+
+body > #background{
+    min-height:100%;
+	position:relative;
+    background: url("../img/guia.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+body > #background > nav{
+    position: relative;
+    overflow: hidden;
+    height: 100px;
+}
+
+body > #background > nav > div > ul{
+    margin: 1% 4% 0% 0%;
+}
+
+body > #background > nav > div > #logotipo{
+    margin: 1% 0% 0% 4%;
+}
+
+#cont-principal{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+body > div{
+    padding-bottom:20%;
+}
+
+body > div > div > div > h1{
+    text-shadow: 2px 2px 1px #000;
+}
+
+body > div > div > div > p{
+    font-size: 18px;
+    width:90%;
+    margin: 0 auto;
+    color: #fff;
+    text-shadow: 2px 2px 1px #000;
+}
+
+body > #background > .row{
+    margin: 100px auto 0 auto;
+}
+
+body > #background > footer{
+    position:absolute;
+	bottom:0;
+	width:100%;
+}
