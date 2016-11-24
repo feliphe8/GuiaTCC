@@ -12,7 +12,11 @@ formUser :: Form Usuario
 formUser = renderDivs $ Usuario
     <$> areq emailField    "Email"    Nothing
     <*> areq passwordField "Senha"    Nothing
-    <*> areq (selectField usuario) "TipoUser" Nothing
+    <*> areq (selectField usuario) "Tipo de usuário" Nothing
+    
+usuario = do
+    entidades <- runDB $ selectList [] [Asc TipoUserTipo] 
+    optionsPairs $ fmap (\ent -> (tipoUserTipo $ entityVal ent, entityKey ent)) entidades
     
 getLoginR :: Handler Html
 getLoginR = do
@@ -57,11 +61,11 @@ postLoginR = do
                 Nothing -> redirect LoginR
                 Just (Entity uid _) -> do
                     setSession "_ID" (pack $ show uid)
-                    redirect PerfilR
+                    redirect PainelR
         _ -> redirect HomeR
         
-getPerfilR :: Handler Html
-getPerfilR = do
+getPainelR :: Handler Html
+getPainelR = do
     userId <- lookupSession "_ID"
     case userId of
        Just str -> do
