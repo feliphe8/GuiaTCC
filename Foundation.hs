@@ -7,6 +7,10 @@ module Foundation where
 import Yesod
 import Yesod.Static
 import Data.Text
+import Pdf
+import System.FilePath
+import System.Directory
+import qualified Data.Text as T
 import Database.Persist.Postgresql
     ( ConnectionPool, SqlBackend, runSqlPool)
 
@@ -28,9 +32,9 @@ TipoUser
 TCC
     titulo      Text
     integrantes Text
-    nomeCurso   CursoNome
+    cursoid     CursoId
     orientador  Text
-    arquivo     Text
+    nomeArquivo Arquivo
     deriving Show
     
 Curso
@@ -48,6 +52,14 @@ instance Yesod App where
     
     isAuthorized LoginR _ = return Authorized
     isAuthorized HomeR _ = return Authorized
+    isAuthorized CadastroCursoR _ = return Authorized
+    isAuthorized UsuarioR _ = return Authorized
+    isAuthorized CadastroTipoR _ = return Authorized
+    isAuthorized BibliotecaR _ = return Authorized
+    isAuthorized PortalR _ = return Authorized
+    isAuthorized SobreR _ = return Authorized
+    isAuthorized TccR _ = return Authorized
+    isAuthorized ListTccR _ = return Authorized
     isAuthorized _ _ = estaAutenticado
     
 estaAutenticado :: Handler AuthResult
@@ -67,5 +79,19 @@ instance YesodPersist App where
 instance RenderMessage App FormMessage where
     renderMessage _ _ = defaultFormMessage
 
-widgetForm :: Route Sitio -> Enctype -> Widget -> Text -> Widget
+widgetForm :: Route App -> Enctype -> Widget -> Text -> Widget
 widgetForm x enctype widget y = $(whamletFile "templates/form.hamlet")
+
+uploadDirectory :: FilePath
+uploadDirectory = "static"
+
+writeToServer :: Maybe FileInfo -> Handler FilePath -- funcao que insere as inf do arquivo no server
+writeToServer Nothing = undefined --50x
+writeToServer (Just file) = do
+    let filename = T.unpack $ fileName file -- text to string
+        path = imageFilePath filename
+    liftIO $ fileMove file path -- subir de mon , mudar de uma(IO) a outra(HANDLER)
+    return filename
+
+imageFilePath :: String -> FilePath
+imageFilePath f = uploadDirectory </> f
