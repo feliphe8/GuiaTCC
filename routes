@@ -3,10 +3,13 @@
 /portal                           PortalR             GET     
 /sobre                            SobreR              GET
 /static                           StaticR             Static getStatic
-/tcc/cadastro                     TccR                GET POST
-/tcc/listagem                     ListTccR            GET
+/painel/tcc/cadastro              TccR                GET POST
+/painel/tcc/listagem              ListTccR            GET
+/painel/tcc/deletar/#TCCId        DelTccR             POST
 /usuario/cadastro                 UsuarioR            GET POST
-/usuario/login                    LoginR              GET POST
-/perfil                           PerfilR             GET
+/usuario/login                    LoginUsuarioR       GET POST
+/painel                           PainelR             GET
 /logoff                           LogoffR             POST
-/curso/cadastro                   CadastroCursoR       GET POST
+/curso/cadastro                   CadastroCursoR      GET POST
+/tipo/cadastro                    CadastroTipoR       GET POST
+/tipo/deletar/#TipoUserId         DelTipoR            POST
